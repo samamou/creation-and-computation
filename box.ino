@@ -95,12 +95,14 @@ void loop()
   sensor1Constrained = constrain(sensor1Value, sensor1Min, sensor1Max);
   sensor2Constrained = constrain(sensor2Value, sensor2Min, sensor2Max);
 
+  //if both sensors are above their thresholds, start the show
   if (showRunning == false && showDone == false && sensor1Value > sensor1Threshold && sensor2Value > sensor2Threshold)
   {
     showRunning = true;
     showStartTime = millis();
   }
 
+  //if the show is running, calculate the elapsed time and set the LED values accordingly
   if (showRunning == true)
   {
     showElapsed = millis() - showStartTime;
@@ -132,6 +134,7 @@ void loop()
       showDone = true;
     }
   }
+  //if the show is not running, set the LED values based on the sensor readings
   else
   {
     if (sensor1Value < sensor1Threshold && sensor2Value < sensor2Threshold)
